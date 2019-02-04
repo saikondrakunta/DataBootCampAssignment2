@@ -1,0 +1,25 @@
+Sub Multi_Yr_Stock()
+For Each ws In ActiveWorkbook.Worksheets
+    ws.Activate
+    Dim ticker As String
+    Dim lastrow As Long
+    lastrow = Cells(Rows.Count, 1).End(xlUp).Row
+    Dim total_stock As Double
+    total_stock = 0
+    Dim ticker_row As Integer
+    ticker_row = 2
+
+    For i = 2 To lastrow
+      total_stock = total_stock + Cells(i, 7).Value
+
+        If Cells(i, 1).Value <> Cells(i + 1, 1).Value Then
+            ticker = Cells(i, 1).Value
+            Cells(ticker_row, 9).Value = ticker
+            Cells(ticker_row, 10).Value = total_stock
+        total_stock = 0
+        ticker_row = ticker_row + 1
+        End If
+
+    Next i
+ Next ws
+End Sub
